@@ -99,7 +99,7 @@ const Index = () => {
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            Premium Spirits
+            Beverage King
           </div>
           <div className="flex items-center gap-4">
             {user ? (
@@ -160,7 +160,7 @@ const Index = () => {
       {/* Footer */}
       <footer className="py-8 px-4 border-t border-border">
         <div className="container mx-auto text-center text-muted-foreground">
-          <p>© 2024 Premium Spirits. All rights reserved.</p>
+          <p>© 2024 Beverage King. All rights reserved.</p>
         </div>
       </footer>
 

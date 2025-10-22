@@ -116,7 +116,7 @@ export const AuthDialog = ({ open, onOpenChange, onSuccess }: AuthDialogProps) =
               <Wine className="w-8 h-8 text-primary" />
             </div>
           </div>
-          <DialogTitle className="text-2xl text-center">Join Premium Spirits</DialogTitle>
+          <DialogTitle className="text-2xl text-center">Join Beverage King</DialogTitle>
           <DialogDescription className="text-center">
             Create an account or sign in to start earning rewards
           </DialogDescription>

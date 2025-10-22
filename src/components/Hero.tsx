@@ -24,7 +24,7 @@ export const Hero = ({ onGetStarted }: HeroProps) => {
           {/* Main heading */}
           <h1 className="mb-6 text-5xl md:text-7xl font-bold tracking-tight">
             <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-              Premium Spirits
+              Beverage King
             </span>
             <br />
             <span className="text-foreground">Exceptional Rewards</span>
