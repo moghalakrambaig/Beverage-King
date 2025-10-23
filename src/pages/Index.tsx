@@ -5,6 +5,8 @@ import { Hero } from "@/components/Hero";
 import { PointsDisplay } from "@/components/PointsDisplay";
 import { DiscordSection } from "@/components/DiscordSection";
 import { AuthDialog } from "@/components/AuthDialog";
+import { QRCodeSection } from "@/components/QRCodeSection";
+import { ShareSection } from "@/components/ShareSection";
 import { Button } from "@/components/ui/button";
 import { LogOut, User as UserIcon } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -163,6 +165,10 @@ const Index = () => {
         )}
         
         <DiscordSection />
+        
+        <ShareSection />
+        
+        <QRCodeSection />
       </main>
 
       {/* Footer */}
