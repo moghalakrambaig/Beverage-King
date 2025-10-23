@@ -22,19 +22,25 @@ export const Hero = ({ onGetStarted }: HeroProps) => {
 
           {/* Main heading */}
           <h1 className="mb-6 text-5xl md:text-7xl font-bold tracking-tight">
-            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-gradient">
               Insiders Club
             </span>
           </h1>
 
           {/* Subheading */}
-          <p className="mb-12 text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
-            This isn't your typical rewards or loyalty program - no points, no punches, no complicated rules. 
+          <p className="mb-12 text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
+            This isn't your typical rewards or loyalty program — no points, no punches, no complicated rules. 
             We're not asking you to prove your loyalty. All we're asking is that you show up, sign up, and get in on the good stuff before anyone else.
           </p>
 
+          {/* VIP Message */}
+          <p className="mb-12 text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
+            Get exclusive early access to barrel drops, first looks at special releases, and behind-the-scenes updates on what we're working on. 
+            This is your VIP pass to everything happening at the crown jewel of spirits.
+          </p>
+
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
             <Button 
               onClick={onGetStarted}
               size="lg"
@@ -43,6 +49,11 @@ export const Hero = ({ onGetStarted }: HeroProps) => {
               Join the Insiders Club
             </Button>
           </div>
+
+          {/* Sign Up Instructions */}
+          <p className="text-lg text-muted-foreground">
+            Ask the cashier how to sign up, or simply join during checkout!
+          </p>
 
           {/* Feature highlights */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">

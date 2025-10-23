@@ -36,17 +36,22 @@ const Index = () => {
       }
     );
 
-    // Check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      if (session?.user) {
-        fetchUserPoints(session.user.id);
-      }
-      setLoading(false);
-    });
+    // Check for existing session and ensure minimum loading time of 2.5 seconds
+    const loadingTimer = setTimeout(() => {
+      supabase.auth.getSession().then(({ data: { session } }) => {
+        setSession(session);
+        setUser(session?.user ?? null);
+        if (session?.user) {
+          fetchUserPoints(session.user.id);
+        }
+        setLoading(false);
+      });
+    }, 2500); // 2.5 seconds minimum loading time
 
-    return () => subscription.unsubscribe();
+    return () => {
+      subscription.unsubscribe();
+      clearTimeout(loadingTimer);
+    };
   }, []);
 
   const fetchUserPoints = async (userId: string) => {
@@ -88,9 +93,19 @@ const Index = () => {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-background">
-        <div className="text-center">
-          <p className="text-xl text-muted-foreground">Loading...</p>
+      <div className="loading-container bg-background">
+        <div className="loading-content">
+          <div className="loading-glass">
+            <div className="loading-liquid">
+              <div className="bubble"></div>
+              <div className="bubble"></div>
+              <div className="bubble"></div>
+              <div className="bubble"></div>
+            </div>
+          </div>
+          <p className="text-xl animate-gradient bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+            Pouring some spirits...
+          </p>
         </div>
       </div>
     );
@@ -103,11 +118,42 @@ const Index = () => {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <img src={bkLogo} alt="Beverage King" className="w-12 h-12 object-contain" />
-            <span className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            <span className="text-2xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-gradient">
               Beverage King
             </span>
           </div>
+
           <div className="flex items-center gap-4">
+            {/* Navigation Links */}
+            <div className="hidden md:flex items-center gap-2">
+              <Button 
+                variant="ghost" 
+                size="sm"
+                className="text-muted-foreground hover:text-primary hover:bg-primary/10"
+                onClick={() => {
+                  const element = document.querySelector('#join-section');
+                  element?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                Join Insiders Club
+              </Button>
+              <Button 
+                variant="ghost" 
+                size="sm"
+                className="text-muted-foreground hover:text-primary hover:bg-primary/10"
+                onClick={() => {
+                  const element = document.querySelector('#discord-section');
+                  element?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                Join Discord
+              </Button>
+            </div>
+
+            {/* Separator */}
+            <div className="hidden md:block w-px h-6 bg-border"></div>
+
+            {/* Auth Buttons */}
             {user ? (
               <>
                 <div className="hidden sm:flex items-center gap-2 text-sm">
@@ -143,13 +189,13 @@ const Index = () => {
         {user ? (
           <PointsDisplay points={points} totalEarned={totalEarned} />
         ) : (
-          <div className="py-16 px-4 text-center max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold mb-4">
+          <div id="join-section" className="py-16 px-4 text-center max-w-3xl mx-auto scroll-mt-24">
+            <h2 className="text-3xl font-bold mb-6">
               Join the Insiders Club
             </h2>
-            <p className="text-muted-foreground mb-6 text-lg">
+            <p className="text-muted-foreground mb-6 text-lg max-w-3xl mx-auto">
               This is your VIP pass to everything happening at the crown jewel of spirits. 
-              Join the Insiders Club today - and never miss a drop again.
+              Join the Insiders Club today — and never miss a drop again.
             </p>
             <p className="text-muted-foreground mb-8 text-base">
               Ask the cashier how to sign up, or simply join during checkout!
