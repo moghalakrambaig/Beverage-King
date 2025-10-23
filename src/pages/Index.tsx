@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { Link } from "react-router-dom";
 import { User, Session } from "@supabase/supabase-js";
 import { Hero } from "@/components/Hero";
 import { PointsDisplay } from "@/components/PointsDisplay";
 import { DiscordSection } from "@/components/DiscordSection";
 import { AuthDialog } from "@/components/AuthDialog";
-import { QRCodeSection } from "@/components/QRCodeSection";
-import { ShareSection } from "@/components/ShareSection";
+import { ShareSidebar } from "@/components/ShareSidebar";
 import { Button } from "@/components/ui/button";
 import { LogOut, User as UserIcon } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -116,12 +116,14 @@ const Index = () => {
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <img src={bkLogo} alt="Beverage King" className="w-12 h-12 object-contain" />
-            <span className="text-2xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-gradient">
-              Beverage King
-            </span>
-          </div>
+          <Link to="/" className="flex items-center gap-3">
+            <div>
+              <img src={bkLogo} alt="Beverage King" className="w-12 h-12 object-contain" />
+            </div>
+            <div>
+              <span className="text-2xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-gradient">Beverage King</span>
+            </div>
+          </Link>
 
           <div className="flex items-center gap-4">
             {/* Navigation Links */}
@@ -210,11 +212,10 @@ const Index = () => {
           </div>
         )}
         
-        <DiscordSection />
-        
-        <ShareSection />
-        
-        <QRCodeSection />
+  <DiscordSection />
+
+  {/* Share sidebar is always available */}
+  <ShareSidebar />
       </main>
 
       {/* Footer */}
