@@ -103,9 +103,6 @@ const Index = () => {
               <div className="bubble"></div>
             </div>
           </div>
-          <p className="text-xl animate-gradient bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-            Pouring some spirits...
-          </p>
         </div>
       </div>
     );
