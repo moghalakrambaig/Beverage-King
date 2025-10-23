@@ -19,6 +19,8 @@ const Index = () => {
   const [points, setPoints] = useState(0);
   const [totalEarned, setTotalEarned] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [sessionReady, setSessionReady] = useState(false);
+  const [animationDone, setAnimationDone] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -36,23 +38,31 @@ const Index = () => {
       }
     );
 
-    // Check for existing session and ensure minimum loading time of 2.5 seconds
-    const loadingTimer = setTimeout(() => {
-      supabase.auth.getSession().then(({ data: { session } }) => {
-        setSession(session);
-        setUser(session?.user ?? null);
-        if (session?.user) {
-          fetchUserPoints(session.user.id);
-        }
-        setLoading(false);
-      });
-    }, 2500); // 2.5 seconds minimum loading time
+    // Check for existing session immediately. We'll wait to hide the loading
+    // screen until the CSS fill animation completes (see onAnimationEnd handler).
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+      if (session?.user) {
+        fetchUserPoints(session.user.id);
+      }
+      setSessionReady(true);
+    }).catch(() => {
+      // even if session fetch fails, allow animation to finish
+      setSessionReady(true);
+    });
 
     return () => {
       subscription.unsubscribe();
-      clearTimeout(loadingTimer);
     };
   }, []);
+
+  // When both session load and animation complete, dismiss the loading screen
+  useEffect(() => {
+    if (sessionReady && animationDone) {
+      setLoading(false);
+    }
+  }, [sessionReady, animationDone]);
 
   const fetchUserPoints = async (userId: string) => {
     const { data, error } = await supabase
@@ -96,12 +106,22 @@ const Index = () => {
       <div className="loading-container bg-background">
         <div className="loading-content">
           <div className="loading-glass">
-            <div className="loading-liquid">
-              <div className="bubble"></div>
-              <div className="bubble"></div>
-              <div className="bubble"></div>
-              <div className="bubble"></div>
+            <div
+              className="loading-liquid"
+              onAnimationEnd={(e) => {
+                // animationName can be found on the native event
+                const name = (e.nativeEvent as any).animationName as string;
+                if (name === 'fill-glass') {
+                  setAnimationDone(true);
+                }
+              }}
+            >
+              <div className="bubble" />
+              <div className="bubble" />
+              <div className="bubble" />
+              <div className="bubble" />
             </div>
+            
           </div>
         </div>
       </div>
