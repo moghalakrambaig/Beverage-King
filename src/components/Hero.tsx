@@ -21,37 +21,37 @@ export const Hero = ({ onGetStarted }: HeroProps) => {
           </div>
 
           {/* Main heading */}
-          <h1 className="mb-6 text-5xl md:text-7xl font-bold tracking-tight">
+          <h1 className="mb-8 text-4xl md:text-6xl font-bold tracking-tight">
             <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-gradient">
               Insiders Club
             </span>
           </h1>
 
           {/* Subheading */}
-          <p className="mb-12 text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="mb-10 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             This isn't your typical rewards or loyalty program — no points, no punches, no complicated rules. 
             We're not asking you to prove your loyalty. All we're asking is that you show up, sign up, and get in on the good stuff before anyone else.
           </p>
 
           {/* VIP Message */}
-          <p className="mb-12 text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="mb-10 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Get exclusive early access to barrel drops, first looks at special releases, and behind-the-scenes updates on what we're working on. 
             This is your VIP pass to everything happening at the crown jewel of spirits.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
             <Button 
               onClick={onGetStarted}
               size="lg"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-lg rounded-xl shadow-[0_0_30px_hsl(45_100%_60%/0.3)] hover:shadow-[0_0_40px_hsl(45_100%_60%/0.4)] transition-all"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 py-5 text-base rounded-xl shadow-[0_0_30px_hsl(45_100%_60%/0.3)] hover:shadow-[0_0_40px_hsl(45_100%_60%/0.4)] transition-all"
             >
               Join the Insiders Club
             </Button>
           </div>
 
           {/* Sign Up Instructions */}
-          <p className="text-lg text-muted-foreground">
+          <p className="text-base text-muted-foreground">
             Ask the cashier how to sign up, or simply join during checkout!
           </p>
 
