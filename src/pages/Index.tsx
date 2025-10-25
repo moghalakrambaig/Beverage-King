@@ -108,10 +108,10 @@ const Index = () => {
           <div className="loading-glass">
             <div
               className="loading-liquid"
-              onAnimationEnd={(e) => {
-                // animationName can be found on the native event
-                const name = (e.nativeEvent as any).animationName as string;
-                if (name === 'fill-glass') {
+              onAnimationEnd={(e: React.AnimationEvent<HTMLDivElement>) => {
+                // animationName comes from the animation event
+                const name = e.animationName as string;
+                if (name === "fill-glass") {
                   setAnimationDone(true);
                 }
               }}
@@ -190,19 +190,31 @@ const Index = () => {
                 </Button>
               </>
             ) : (
-              <Button
-                onClick={() => setAuthDialogOpen(true)}
-                className="bg-primary hover:bg-primary/90 text-primary-foreground"
-              >
-                Sign In
-              </Button>
+              <div className="flex items-center gap-2">
+                  <Button
+                    onClick={() => setAuthDialogOpen(true)}
+                    size="sm"
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                  >
+                    Sign In
+                  </Button>
+                  <Link to="/admin">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="ml-2 text-white border-2 border-yellow-400 hover:bg-yellow-400/10 hover:text-white"
+                    >
+                      Admin
+                    </Button>
+                  </Link>
+              </div>
             )}
           </div>
         </div>
       </header>
 
       {/* Main content */}
-      <main className="pt-16">
+  <main className="pt-12">
         <Hero onGetStarted={() => !user && setAuthDialogOpen(true)} />
         
         {user ? (

@@ -57,7 +57,7 @@ export const ShareSidebar = () => {
   };
 
   return (
-    <div className="fixed right-0 top-1/2 -translate-y-1/2 z-40">
+  <div className="fixed right-0 top-1/2 -translate-y-1/2 z-60">
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild>
           <Button 
