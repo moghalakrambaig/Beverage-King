@@ -21,38 +21,40 @@ import {
 import { ChevronDown } from "lucide-react";
 
 export function AdminDashboard() {
-  const [customers, setCustomers] = useState([]);
+  const [customers, setCustomers] = useState<any[]>([]);
   const navigate = useNavigate();
 
+  // ✅ Load customers on mount
   useEffect(() => {
-    const email = sessionStorage.getItem("email");
-    const password = sessionStorage.getItem("password");
-    if (email && password) {
-      api
-        .getCustomers(email, password)
-        .then(setCustomers)
-        .catch(console.error);
-    } else {
+    const isLoggedIn = sessionStorage.getItem("email"); // simple check
+    if (!isLoggedIn) {
       navigate("/login");
+      return;
     }
+
+    api.getCustomers()
+      .then(setCustomers)
+      .catch((err) => {
+        console.error(err);
+        alert("Failed to load customers. Are you logged in?");
+        navigate("/login");
+      });
   }, [navigate]);
 
+  // ✅ Logout
   const handleLogout = () => {
     sessionStorage.removeItem("email");
-    sessionStorage.removeItem("password");
     navigate("/login");
   };
 
-  const handleDelete = async (id) => {
-    const email = sessionStorage.getItem("email");
-    const password = sessionStorage.getItem("password");
-    if (email && password) {
-      try {
-        await api.deleteCustomer(id, email, password);
-        setCustomers(customers.filter((c) => c.id !== id));
-      } catch (error) {
-        console.error(error);
-      }
+  // ✅ Delete customer
+  const handleDelete = async (id: number) => {
+    try {
+      await api.deleteCustomer(id);
+      setCustomers(customers.filter((c) => c.id !== id));
+    } catch (error) {
+      console.error(error);
+      alert("Failed to delete customer");
     }
   };
 
