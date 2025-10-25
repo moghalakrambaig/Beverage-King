@@ -28,7 +28,7 @@ export function LoginPage() {
     <div className="flex items-center justify-center h-screen">
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
         <div className="text-center">
-          <h1 className="text-3xl font-bold">Admin Login</h1>
+            <h2 className="text-3xl font-bold mb-6 text-gray-900 text-center drop-shadow-sm">Admin Login</h2>
         </div>
         <div className="space-y-4">
           <div>
